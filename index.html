@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css?v=2">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Message for You</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <audio id="proposalMusic" src="our-song.mp3" loop></audio>
+
     <div class="container">
         <div class="glass-card">
             <h1 class="title">Our Journey</h1>
@@ -16,7 +18,7 @@
             <div class="heart-animation">❤️</div>
 
             <div class="message">
-                <p>From our first day to this very moment, my love for you has only grown. 
+                <p>From our first date to this very moment, my love for you has only grown. 
                    I want to spend the rest of my life making you smile.</p>
                 <h2 class="question">Will you marry me?</h2>
             </div>
@@ -31,33 +33,74 @@
     <script>
         const noBtn = document.querySelector('#noBtn');
         const yesBtn = document.querySelector('#yesBtn');
+        const glassCard = document.querySelector('.glass-card');
 
+        // Logic for "No" button running away
         function moveButton() {
             const padding = 50;
-            // This ensures the button stays within the screen
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-            
             const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
             const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-            
             noBtn.style.position = 'fixed';
-            noBtn.style.left = `${randomX}px`; // Note the backticks here!
-            noBtn.style.top = `${randomY}px`;  // And here!
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
         }
 
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
             moveButton();
         });
 
+        // Stage 1: The "Yes" Click
         yesBtn.addEventListener('click', () => {
-            document.querySelector('.glass-card').innerHTML = `
-                <h1 style="color:white;">❤️ She said YES! ❤️</h1>
-                <p style="color:black; margin-top: 20px;">I love you forever!</p>
+            const music = document.querySelector('#proposalMusic');
+            if(music) music.play();
+
+            glassCard.innerHTML = `
+                <div class="success-message">
+                    <h1 class="title" style="color: #ff4d6d;">YES! ❤️</h1>
+                    <p class="subtitle">You've made me the happiest person!</p>
+                    <div class="heart-animation">💖</div>
+                    <button id="nextBtn" class="next-btn">Next ✨</button>
+                </div>
             `;
+
+            // Wait for the button to exist then add listener
+            document.getElementById('nextBtn').addEventListener('click', showHoneymoonPage);
         });
+
+        // Stage 2: The Honeymoon Selector
+        function showHoneymoonPage() {
+            glassCard.innerHTML = `
+                <div class="honeymoon-page">
+                    <h2 class="question" style="font-size: 2.2rem;">Honeymoon?</h2>
+                    <p class="subtitle" style="color: #436394;">Where should we go first?</p>
+                    
+                    <select id="destination" class="custom-select">
+                        <option value="" disabled selected>Choose a destination...</option>
+                        <option value="Sylhet">Sylhet (Tea Gardens)</option>
+                        <option value="Cox's Bazar">Cox's Bazar (Sea Beach)</option>
+                        <option value="Bandarban">Bandarban (Mountains)</option>
+                    </select>
+
+                    <button id="finalSubmit" class="submit-btn">Confirm</button>
+                    <p id="selectionMessage" class="final-msg"></p>
+                </div>
+            `;
+
+            document.getElementById('finalSubmit').addEventListener('click', () => {
+                const choice = document.getElementById('destination').value;
+                const msg = document.getElementById('selectionMessage');
+                if(choice) {
+                    msg.innerHTML = `Pack your bags for <b>${choice}</b>! ✈️`;
+                    msg.style.color = "#ff4d6d";
+                } else {
+                    msg.innerText = "Please pick a place! 😊";
+                }
+            });
+        }
     </script>
 </body>
 </html>
