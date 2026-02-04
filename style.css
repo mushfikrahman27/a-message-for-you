@@ -1,0 +1,115 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #7697c8 0%, #9fe3e3 99%);
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden; /* Prevents scrolling when the No button moves */
+    padding: 20px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limits size on Desktop */
+}
+
+
+.container .title{
+  color: rgb(43, 99, 148);
+    font-size: 32px;
+    font-weight: 600;
+}
+
+
+.container .subtitle{
+    color: aliceblue;
+    font-size: 12px;
+    font-weight: 600;
+}
+.message p{
+     color: aliceblue;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.question{
+    color: rgb(135, 38, 144);
+    font-size: 35px;
+    font-weight: 700;
+}
+/* Mobile Specific Adjustments */
+@media (max-width: 480px) {
+    .glass-card {
+        padding: 20px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .btn-group {
+        flex-direction: column; /* Stack buttons on small phones */
+        gap: 25px;
+    }
+
+    button {
+        width: 100%; /* Full width buttons for easier tapping */
+    }
+}
+
+.heart-animation {
+    font-size: 60px;
+    margin: 20px 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.btn-group {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+}
+
+#yesBtn {
+    background: #ff4d6d;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+}
+
+#noBtn {
+    background: white;
+    color: #ff4d6d;
+    transition: all 0.2s ease;
+}

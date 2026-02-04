@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Message for You</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <h1 class="title">Our Journey</h1>
+            <p class="subtitle">Every second with you has been a dream...</p>
+            
+            <div class="heart-animation">❤️</div>
+
+            <div class="message">
+                <p>From our first date to this very moment, my love for you has only grown. 
+                   I want to spend the rest of my life making you smile.</p>
+                <h2 class="question">Will you marry me?</h2>
+            </div>
+
+            <div class="btn-group">
+                <button id="yesBtn">YES!</button>
+                <button id="noBtn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.querySelector('#noBtn');
+        const yesBtn = document.querySelector('#yesBtn');
+
+        function moveButton() {
+            const padding = 50;
+            // This ensures the button stays within the screen
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${randomX}px`; // Note the backticks here!
+            noBtn.style.top = `${randomY}px`;  // And here!
+        }
+
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); 
+            moveButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            document.querySelector('.glass-card').innerHTML = `
+                <h1 style="color: white;">❤️ She said YES! ❤️</h1>
+                <p style="color: white; margin-top: 20px;">I love you forever!</p>
+            `;
+        });
+    </script>
+</body>
+</html>
